@@ -20,22 +20,21 @@ public class MatchesService {
     @Autowired
     private MatchesRepository matchesRepository;
 
-    public List<MatchesDTO> findByMatch(Integer countryA, Integer countryB) {
+    public List<MatchesDTO> findByMatch(Integer countryA, Integer countryB) throws Exception {
         List<Countries> countries = countriesRepository.findAll();
         List<Matches> matches = matchesRepository.findAll();
-        System.out.println(countries.get(countryA));
         List<MatchesDTO> newMatchs =  new ArrayList<>();
-        MatchesDTO newMatch = new MatchesDTO();
         for (Matches match : matches) {
-            if (match.getCountry_a().equals(countries.get(countryA - 1)) && match.getCountry_b().equals(countries.get(countryB - 1))) {
-                newMatch.setCountryA(match.getCountry_a().getCountry());
-                newMatch.setCountryB(match.getCountry_b().getCountry());
-                newMatch.setEncounterMatch(match.getEncounterMatch());
-                newMatch.setGoalsCountryA(match.getGoalsCountryA());
-                newMatch.setGoalsCountryB(match.getGoalsCountryB());
-                newMatch.setYearMatch(match.getYearMatch());
-                newMatchs.add(newMatch);
-            }
+                if (match.getCountry_a().equals(countries.get(countryA - 1)) && match.getCountry_b().equals(countries.get(countryB - 1))) {
+                    MatchesDTO newMatch = new MatchesDTO();
+                    newMatch.setCountryA(match.getCountry_a().getCountry());
+                    newMatch.setCountryB(match.getCountry_b().getCountry());
+                    newMatch.setYearMatch(match.getYearMatch());
+                    newMatch.setEncounterMatch(match.getEncounterMatch());
+                    newMatch.setGoalsCountryA(match.getGoalsCountryA());
+                    newMatch.setGoalsCountryB(match.getGoalsCountryB());
+                    newMatchs.add(newMatch);
+                }
         }
         return newMatchs;
     }

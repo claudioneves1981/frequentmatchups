@@ -16,7 +16,7 @@ public class MatchesController {
     private MatchesService matchesService;
 
     @GetMapping("/matches/countryA/{countryA}/countryB/{countryB}")
-    public List<MatchesDTO> situacao(@PathVariable("countryA") Integer countryA, @PathVariable("countryB") Integer countryB){
+    public List<MatchesDTO> situacao(@PathVariable("countryA") Integer countryA, @PathVariable("countryB") Integer countryB) throws Exception {
         return matchesService.findByMatch(countryA, countryB);
     }
 
